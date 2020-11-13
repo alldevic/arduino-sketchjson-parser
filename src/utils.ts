@@ -5,7 +5,11 @@ export function getPlatform(fqbn: string) {
 }
 
 // https://arduino.github.io/arduino-cli/latest/sketch-specification/#metadata
-export function getLibs(libs: Array<LibInfo>) {
-    const libString = libs.map(lib => `${lib.name}@${lib.version}`).join();
+export function getLibs(libs: LibInfo[]) {
+    const libString = libs.map(lib => {
+        return lib.version
+            ? `${lib.name}@${lib.version}`
+            : `${lib.name}`
+    }).join();
     return libString;
 }
