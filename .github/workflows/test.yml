@@ -31,3 +31,17 @@ jobs:
         file-path: dist/*.js
         commit-msg: Update dist
         github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: cp docs/sample_sketch.json sketch.json
+    - name: testrun
+      uses: ./
+    - run: |
+        echo Platform: ${{ steps.testrun.outputs.platform }}
+        echo FQBN: ${{ steps.testrun.outputs.fqbn }}
+        echo Included libs: ${{ steps.testrun.outputs.included_libs }}
+        echo Skipped: ${{ steps.testrun.outputs.skipped }}

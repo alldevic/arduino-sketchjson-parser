@@ -1,0 +1,23 @@
+{
+    "cpu": {
+        "fqbn": "arduino:samd:mkrgsm1400",
+        "name": "Arduino MKR GSM 1400",
+        "type": "serial"
+    },
+    "secrets": [
+        {
+            "name": "SECRET_SSID",
+            "value": ""
+        }
+    ],
+    "included_libs": [
+        {
+            "name": "Library 1",
+            "version": "0.0.3"
+        },
+        {
+            "name": "Lib2",
+            "version": "1.0.3"
+        }
+    ]
+}
