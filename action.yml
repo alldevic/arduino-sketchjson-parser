@@ -1,0 +1,23 @@
+name: 'Arduino sketch.json parser'
+description: 'Action for parsing Arduino sketch.json file'
+author: 'Nikolay Bely'
+branding:
+  icon: 'file-text'
+  color: 'green'
+inputs:
+  sketchjson:  # id of input
+    description: 'sketch.json file location'
+    required: false
+    default: 'sketch.json'
+outputs:
+  platform: # id of output
+    description: 'Platform string'
+  fqbn: # id of output
+    description: 'FQBN string'
+  libraries: # id of output
+    description: 'Comma separated list of libraries'
+  skipped:
+    description: 'Boolean to check if this step have been skipped'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
