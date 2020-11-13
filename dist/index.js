@@ -161,10 +161,8 @@ function main() {
         const included_libs = utils_1.getLibs(data.included_libs);
         core.info(`Included libs: ${included_libs}`);
         core.setOutput("included_libs", included_libs);
-        core.setOutput("skipped", false);
     }
     catch (error) {
-        core.setOutput("skipped", true);
         core.setFailed(error.message);
     }
 }
@@ -519,7 +517,11 @@ function getPlatform(fqbn) {
 exports.getPlatform = getPlatform;
 // https://arduino.github.io/arduino-cli/latest/sketch-specification/#metadata
 function getLibs(libs) {
-    const libString = libs.map(lib => `${lib.name}@${lib.version}`).join();
+    const libString = libs.map(lib => {
+        return lib.version
+            ? `${lib.name}@${lib.version}`
+            : `${lib.name}`;
+    }).join();
     return libString;
 }
 exports.getLibs = getLibs;
