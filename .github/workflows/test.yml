@@ -7,28 +7,6 @@ on:
 
 jobs:
   # unit tests
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - run: npm ci
-
-    - name: Restore npm cache
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
-
-    - run: npm build
-
-
   units:
     runs-on: ubuntu-latest
     steps:
@@ -45,11 +23,11 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
     - run: npm ci
-    - run: npm test
-
-  # test action works running from the graph
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ./
+    - run: npm run test
+    - run: npm run build
+    - name: Update dist
+      uses: test-room-7/action-update-file@v1
+      with:
+        file-path: dist/*.js
+        commit-msg: Update dist
+        github-token: ${{ secrets.GITHUB_TOKEN }}
