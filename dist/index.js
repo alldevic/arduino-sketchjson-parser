@@ -123,26 +123,42 @@ exports.issueCommand = issueCommand;
 
 "use strict";
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = __importDefault(__webpack_require__(470));
+const core = __importStar(__webpack_require__(470));
 const utils_1 = __webpack_require__(611);
 function main() {
     try {
         // https://arduino.github.io/arduino-cli/latest/sketch-specification/#metadata
-        const data = require(core_1.default.getInput("sketchjson"));
-        core_1.default.setOutput("fqbn", data.cpu.fqbn);
+        const data = require(core.getInput("sketchjson"));
+        core.setOutput("fqbn", data.cpu.fqbn);
         const platform = utils_1.getPlatform(data.cpu.fqbn);
-        core_1.default.setOutput("platform", platform);
+        core.setOutput("platform", platform);
         const included_libs = utils_1.getLibs(data.included_libs);
-        core_1.default.setOutput("included_libs", included_libs);
-        core_1.default.setOutput("skipped", false);
+        core.setOutput("included_libs", included_libs);
+        core.setOutput("skipped", false);
     }
     catch (error) {
-        core_1.default.setOutput("skipped", true);
-        core_1.default.setFailed(error.message);
+        core.setOutput("skipped", true);
+        core.setFailed(error.message);
     }
 }
 main();
