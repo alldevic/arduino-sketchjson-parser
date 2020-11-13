@@ -31,12 +31,6 @@ jobs:
         file-path: dist/*.js
         commit-msg: Update dist
         github-token: ${{ secrets.GITHUB_TOKEN }}
-
-  
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
     - name: Copy sample sketch.json
       run: cp docs/sample_sketch.json sketch.json
     - name: testrun
