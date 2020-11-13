@@ -5,16 +5,16 @@ branding:
   icon: 'file-text'
   color: 'green'
 inputs:
-  sketchjson:  # id of input
+  sketchjson:
     description: 'sketch.json file location'
     required: false
     default: 'sketch.json'
 outputs:
-  platform: # id of output
+  platform:
     description: 'Platform string'
-  fqbn: # id of output
+  fqbn:
     description: 'FQBN string'
-  included_libs: # id of output
+  included_libs:
     description: 'Comma separated list of libraries'
   skipped:
     description: 'Boolean to check if this step have been skipped'

@@ -12,12 +12,16 @@ function main() {
         const file = fs.readFileSync(path, "utf-8");
         const data = JSON.parse(file);
 
-        core.setOutput("fqbn", data.cpu.fqbn);
+        const fqbn = data.cpu.fqbn
+        core.info(`FQBN: ${fqbn}`)
+        core.setOutput("fqbn", fqbn);
 
-        const platform = getPlatform(data.cpu.fqbn);
+        const platform = getPlatform(fqbn);
+        core.info(`Platform: ${platform}`)
         core.setOutput("platform", platform);
 
         const included_libs = getLibs(data.included_libs);
+        core.info(`Included libs: ${included_libs}`)
         core.setOutput("included_libs", included_libs);
 
         core.setOutput("skipped", false);

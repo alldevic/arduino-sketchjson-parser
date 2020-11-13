@@ -29,12 +29,6 @@ jobs:
       run: cp docs/sample_sketch.json sketch.json
     - name: testrun
       uses: ./
-    - name: Write outputs of action
-      run: |
-        echo Platform: ${{ steps.testrun.outputs.platform }}
-        echo FQBN: ${{ steps.testrun.outputs.fqbn }}
-        echo Included libs: ${{ steps.testrun.outputs.included_libs }}
-        echo Skipped: ${{ steps.testrun.outputs.skipped }}
     - name: Update dist
       uses: test-room-7/action-update-file@v1
       with:
