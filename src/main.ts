@@ -1,10 +1,16 @@
+'use strict';
+
 import * as core from '@actions/core';
+import * as fs from 'fs';
 import { getPlatform, getLibs } from './utils';
+
 
 function main() {
     try {
         // https://arduino.github.io/arduino-cli/latest/sketch-specification/#metadata
-        const data = require(core.getInput("sketchjson"));
+        const path = core.getInput("sketchjson")
+        const file = fs.readFileSync(path, "utf-8");
+        const data = JSON.parse(file);
 
         core.setOutput("fqbn", data.cpu.fqbn);
 
