@@ -37,10 +37,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: cp docs/sample_sketch.json sketch.json
+    - name: Copy sample sketch.json
+      run: cp docs/sample_sketch.json sketch.json
     - name: testrun
       uses: ./
-    - run: |
+    - name: Write outputs of action
+      run: |
         echo Platform: ${{ steps.testrun.outputs.platform }}
         echo FQBN: ${{ steps.testrun.outputs.fqbn }}
         echo Included libs: ${{ steps.testrun.outputs.included_libs }}
