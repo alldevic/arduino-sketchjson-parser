@@ -519,7 +519,7 @@ function getPlatform(fqbn) {
 exports.getPlatform = getPlatform;
 // https://arduino.github.io/arduino-cli/latest/sketch-specification/#metadata
 function getLibs(libs) {
-    const libString = libs.map(lib => `${lib.name}%${lib.version}`).join();
+    const libString = libs.map(lib => `${lib.name}@${lib.version}`).join();
     return libString;
 }
 exports.getLibs = getLibs;
