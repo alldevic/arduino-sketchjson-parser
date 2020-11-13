@@ -14,7 +14,7 @@ outputs:
     description: 'Platform string'
   fqbn: # id of output
     description: 'FQBN string'
-  libraries: # id of output
+  included_libs: # id of output
     description: 'Comma separated list of libraries'
   skipped:
     description: 'Boolean to check if this step have been skipped'

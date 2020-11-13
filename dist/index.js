@@ -129,11 +129,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = __importDefault(__webpack_require__(470));
 try {
-    const file = core_1.default.getInput("sketchjson");
-    console.log(`Selected file: ${file}`);
+    // https://arduino.github.io/arduino-cli/latest/sketch-specification/#metadata
+    const data = require(core_1.default.getInput("sketchjson"));
+    core_1.default.setOutput("fqbn", data.cpu.fqbn);
+    const platform = getPlatform(data.cpu.fqbn);
+    core_1.default.setOutput("platform", platform);
+    const included_libs = getLibs(data.included_libs);
+    core_1.default.setOutput("included_libs", included_libs);
+    core_1.default.setOutput("skipped", "false");
 }
 catch (error) {
+    core_1.default.setOutput("skipped", "true");
     core_1.default.setFailed(error.message);
+}
+function getPlatform(fqbn) {
+    // https://arduino.github.io/arduino-cli/latest/platform-specification/#hardware-folders-structure
+    const platform = fqbn.split(":", 2).join();
+    return platform;
+}
+// https://arduino.github.io/arduino-cli/latest/sketch-specification/#metadata
+function getLibs(libs) {
+    let res = "";
+    libs.forEach(lib => {
+        res.concat(`${lib.name}%${lib.version}`);
+    });
+    return res;
 }
 
 
