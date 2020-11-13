@@ -23,10 +23,7 @@ function main() {
         const included_libs = getLibs(data.included_libs);
         core.info(`Included libs: ${included_libs}`)
         core.setOutput("included_libs", included_libs);
-
-        core.setOutput("skipped", false);
     } catch (error) {
-        core.setOutput("skipped", true);
         core.setFailed(error.message);
     }
 }
