@@ -25,12 +25,6 @@ jobs:
     - run: npm ci
     - run: npm run test
     - run: npm run build
-    - name: Update dist
-      uses: test-room-7/action-update-file@v1
-      with:
-        file-path: dist/*.js
-        commit-msg: Update dist
-        github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Copy sample sketch.json
       run: cp docs/sample_sketch.json sketch.json
     - name: testrun
@@ -41,3 +35,9 @@ jobs:
         echo FQBN: ${{ steps.testrun.outputs.fqbn }}
         echo Included libs: ${{ steps.testrun.outputs.included_libs }}
         echo Skipped: ${{ steps.testrun.outputs.skipped }}
+    - name: Update dist
+      uses: test-room-7/action-update-file@v1
+      with:
+        file-path: dist/*.js
+        commit-msg: Update dist
+        github-token: ${{ secrets.GITHUB_TOKEN }}
