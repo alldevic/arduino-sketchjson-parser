@@ -144,11 +144,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
+const fs = __importStar(__webpack_require__(747));
 const utils_1 = __webpack_require__(611);
 function main() {
     try {
         // https://arduino.github.io/arduino-cli/latest/sketch-specification/#metadata
-        const data = require(core.getInput("sketchjson"));
+        const path = core.getInput("sketchjson");
+        const file = fs.readFileSync(path, "utf-8");
+        const data = JSON.parse(file);
         core.setOutput("fqbn", data.cpu.fqbn);
         const platform = utils_1.getPlatform(data.cpu.fqbn);
         core.setOutput("platform", platform);
