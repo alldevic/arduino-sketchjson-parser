@@ -10,20 +10,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
 
-      - name: Changelog Action
+      - name: Conventional Changelog Action
         id: changelog
-        uses: metcalfc/changelog-generator@v0.4.4
+        uses: TriPSs/conventional-changelog-action@v3
         with:
-          myToken: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.github_token }}
+          output-file: "false"
 
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.1.4
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ needs.build.outputs.version }}
-          body: ${{ steps.changelog.outputs.changelog }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
           draft: false
           prerelease: false
