@@ -26,5 +26,5 @@ test('LibList', async () => {
         { name: "test2", version: "" },
         { name: "test3", version: "v1.2.3" },
     ];
-    expect(getLibs(stub)).toBe("test1,test1@1,test2,test3@v1.2.3");
+    expect(getLibs(stub)).toBe("test,test1@1,test2,test3@v1.2.3");
 });
