@@ -30,7 +30,7 @@ jobs:
     - name: testrun
       uses: ./
     - name: Update dist
-      uses: test-room-7/action-update-file@v1.5.0
+      uses: test-room-7/action-update-file@v1.6.0
       with:
         file-path: dist/*.js
         commit-msg: Update dist
